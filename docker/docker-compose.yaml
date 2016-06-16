@@ -1,14 +1,15 @@
 version: '2'
 
 services:
-  board-ui:
-    image: nginx:alpine
+  board-proxy:
+    image: eugenekha/board-proxy:latest
     volumes:
       - /content/board/board-proxy/src:/usr/share/nginx/html
-      - /content/board/board-proxy/nginx:/etc/nginx/nginx.conf
-    ports:
-      - "8080:80"
+      - /content/board/board-proxy/nginx:/etc/nginx
+    #ports:
+    #  - "8088:8080"
+    network_mode: "bridge"
   #environment:
   # - NGINX_HOST=foobar.com
   # - NGINX_PORT=80
-  #command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    #command: nginx -g 'daemon off;'
